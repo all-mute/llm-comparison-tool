@@ -25,7 +25,7 @@ ENV PATH="/home/appuser/.local/bin:${PATH}"
 # If the list of dev packages grows we should split the requirements.txt file
 COPY requirements.txt .
 # Use only the main dependencies
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 COPY *.py .
 
@@ -40,4 +40,4 @@ EXPOSE $PORT
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
 # Mount the current directory when running: docker run -v $(pwd):/app ... or use the docker-compose.yml file
-ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0", "--browser.gatherUsageStats=false"]
+ENTRYPOINT ["streamlit", "run", "translator.py", "--server.port=8501"]

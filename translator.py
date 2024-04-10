@@ -6,15 +6,17 @@ st.set_page_config(page_title="Перевод редких языков", layout
 st.title("Перевод редких языков")
 
 # Предполагается, что сервер запущен на localhost:8000
-SERVER_URL = os.environ.get("LLM_DOCKER_ADDRESS")
+SERVER_URL = "http://studcamp.merkulov.ai"
 
 def get_translation(model_name, prompt):
-    endpoint = "/generate_text_big" if "bigmodel" in model_name else "/generate_text_mini"
+    endpoint = "/generate_text_big" if "nllb-200" in model_name else "/generate_text_mini"
     data = {"prompt": prompt}
     if "nllb-200" in model_name:
         data["mode"] = model_name.split('-')[-1]
     else:
         data["model_name"] = model_name
+    assert endpoint is not None
+    assert SERVER_URL is not None
     response = requests.post(SERVER_URL + endpoint, json=data)
     return response.json()
 
