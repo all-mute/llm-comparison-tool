@@ -15,8 +15,6 @@ def get_translation(model_name, prompt):
         data["mode"] = model_name.split('-')[-1]
     else:
         data["model_name"] = model_name
-    assert endpoint is not None
-    assert SERVER_URL is not None
     response = requests.post(SERVER_URL + endpoint, json=data)
     return response.json()
 
@@ -36,6 +34,7 @@ def show_response(response):
         with cols[i]:
             st.markdown(f"### {m}")
             with st.expander("Click to show/hide the raw response"):
+                st.write(r)
                 st.write(r["generated_text"])
 
 configuration()
