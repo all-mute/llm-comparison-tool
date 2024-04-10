@@ -3,6 +3,6 @@ venv
 __pycache__
 
 # Keys go here, so never commit it
-.env
+
 
 .ruff_cache/
