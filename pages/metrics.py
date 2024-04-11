@@ -15,8 +15,10 @@ df1 = pd.DataFrame(data1)
 #df2 = pd.DataFrame(data2)
 
 # Создаем вкладки для переключения между таблицами
-tab1 = st.tabs(["Первая таблица"])
+#tab1 = st.tabs(["Первая таблица"])
 
-with tab1:
-    st.write("Таблица 1")
-    st.dataframe(df1)
+#with tab1:
+#    st.write("Таблица 1")
+#    st.dataframe(df1)
+st.write("Сравнение моделей наших и facebook о метрикам")
+st.dataframe(df1)
