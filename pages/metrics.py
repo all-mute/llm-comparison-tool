@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Создаем тестовые данные для таблиц
-data1 = {
+data = {
     'Model': ['Eng_to_Lij_w2vpre', 'Eng_to_Mag_w2vpre', 'Eng_to_Ace_w2vpre', 'Eng_to_Dik_w2vpre',
               'Eng_to_Lij_facebook', 'Eng_to_Mag_facebook', 'Eng_to_Ace_facebook', 'Eng_to_Dik_facebook'],
     'BLUE': [2.90, 4.34, 0.5, 0.76, 9.53, 25.89, 0.71, 2.39],
@@ -10,15 +10,22 @@ data1 = {
     'COMET': [0.463, 0.472, 0.547, 0.582, 0.579, 0.655, 0.29, 0.534]
 }
 
-# Преобразуем словари в DataFrame
-df1 = pd.DataFrame(data1)
-#df2 = pd.DataFrame(data2)
+# Преобразуем словарь в DataFrame
+df = pd.DataFrame(data)
 
-# Создаем вкладки для переключения между таблицами
-#tab1 = st.tabs(["Первая таблица"])
+# Транспонируем DataFrame, чтобы модели были в строках, а метрики - в столбцах
+df_transposed = df.set_index('Model').T
 
-#with tab1:
-#    st.write("Таблица 1")
-#    st.dataframe(df1)
-st.write("Сравнение моделей наших и facebook о метрикам")
-st.dataframe(df1)
+# Создаем вкладки для каждого языка
+tab_labels = ["Lij", "Mag", "Ace", "Dik"]
+tabs = st.tabs(tab_labels)
+
+for i, tab in enumerate(tabs):
+    with tab:
+        # Предполагаем, что каждая модель относится к определенному языку
+        # Здесь вы можете добавить фильтрацию или другую логику, чтобы отобразить данные специфично для каждого языка
+        st.write(f"Сравнение моделей для языка {tab_labels[i]} по метрикам")
+        st.dataframe(df_transposed)
+
+# Обратите внимание, что вам может потребоваться адаптировать логику отображения данных в зависимости от того,
+# как именно ваши данные должны быть разделены по языкам.
