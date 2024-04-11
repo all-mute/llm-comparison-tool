@@ -15,7 +15,7 @@ df1 = pd.DataFrame(data1)
 #df2 = pd.DataFrame(data2)
 
 # Создаем вкладки для переключения между таблицами
-tab1, tab2 = st.tabs(["Первая таблица"])
+tab1 = st.tabs(["Первая таблица"])
 
 with tab1:
     st.write("Таблица 1")
