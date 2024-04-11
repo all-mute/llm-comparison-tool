@@ -1,22 +1,13 @@
 import streamlit as st
 import requests
 import os
+from llm_handler import get_translation
 
 st.set_page_config(page_title="Перевод редких языков", layout="wide")
 st.title("Перевод редких языков")
 
 # Предполагается, что сервер запущен на localhost:8000
 SERVER_URL = "http://studcamp.merkulov.ai"
-
-def get_translation(model_name, prompt):
-    endpoint = "/generate_text_big" if "nllb-200" in model_name else "/generate_text_mini"
-    data = {"prompt": prompt}
-    if "nllb-200" in model_name:
-        data["mode"] = model_name.split('-')[-1]
-    else:
-        data["model_name"] = model_name
-    response = requests.post(SERVER_URL + endpoint, json=data)
-    return response.json()
 
 def configuration():
     models = [
@@ -36,6 +27,7 @@ def show_response(response):
             with st.expander("Click to show/hide the raw response"):
                 st.write(r)
                 st.write(r["generated_text"])
+            st.info(r["generated_text"])
 
 configuration()
 
@@ -50,8 +42,9 @@ if send_button:
         if not user_input:
             st.error("Please enter a request")
         else:
-            responses = []
-            for model in st.session_state.selected_models:
-                response = get_translation(model, user_input)
-                responses.append((model, response))
-            show_response(responses)
+            with st.spinner('Processing...'):
+                responses = []
+                for model in st.session_state.selected_models:
+                    response = get_translation(model, user_input)
+                    responses.append((model, response))
+                show_response(responses)

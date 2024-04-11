@@ -2,24 +2,31 @@ import requests
 import os
 import json
 
-LLM_DOCKER_ADDRESS = os.environ.get("LLM_DOCKER_ADDRESS")
+LLM_DOCKER_ADDRESS = "http://studcamp.merkulov.ai"
 
 
-def get_translation(modelname, mode, promt):
-    if mode:
+def get_translation(model_name, promt):
+    data_in = {}
+
+    if "nllb-200" in model_name:
+        data_in["mode"] = model_name.split('-')[-1]
+    else:
+        data_in["model_name"] = model_name
+
+    if "nllb-200" in model_name:
         postfix = '/generate_text_big'
         data = json.dumps(
             {
-                'mode': mode,
-                'promt': promt,
+                'mode': data_in['mode'],
+                'prompt': promt,
             }
         )
     else:
         postfix = '/generate_text_mini'
         data = json.dumps(
             {
-                'model_name': modelname,
-                'promt': promt,
+                'model_name': data_in['model_name'],
+                'prompt': promt,
             }
         )
 
@@ -27,8 +34,11 @@ def get_translation(modelname, mode, promt):
 
     response = requests.post(
         address,
-        json=data,
+        data=data,
     )
+
+    print(response)
+    print(response.text)
 
     data = response.json()
 
