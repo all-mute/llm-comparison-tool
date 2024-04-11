@@ -10,10 +10,18 @@ st.title("Перевод редких языков")
 SERVER_URL = "http://studcamp.merkulov.ai"
 
 def configuration():
-    models = [
-        'nllb-200-translation_en_to_fr',
-        'smallmodel_1'
+    model_names_0 = [
+        'ourmodel_eng_to_lij',
+        'ourmodel_eng_to_dik',
+        'ourmodel_eng_to_ace',
+        'ourmodel_eng_to_mag',
     ]
+    model_names_1 = [
+        'nllb-200-translation_en_to_fr',
+    ]
+
+    models = model_names_0 + model_names_1
+
     cols = st.columns([5, 2, 1])
     with cols[0]:
         selected_models = st.multiselect("Model(s)", models, placeholder="Select one or two models")
