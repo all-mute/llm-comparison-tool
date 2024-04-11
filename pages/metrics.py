@@ -37,18 +37,24 @@ dfs = {
     "Язык Dik": pd.DataFrame(data_dik)
 }
 
-# Функция для добавления колонок с абсолютной и относительной разницей
-def add_difference_columns(df):
+# Функция для добавления строки с процентной разницей между моделями
+def add_percentage_difference_row(df):
+    percentage_diff = {}
     # Предполагаем, что у нас всегда две модели для сравнения
     for metric in ['BLUE', 'chrf', 'COMET']:
-        df[f'{metric}_abs_diff'] = abs(df[metric].diff()).fillna(0)
-        # Избегаем деления на ноль
-        df[f'{metric}_rel_diff'] = df[metric].pct_change().fillna(0).replace([float('inf'), -float('inf')], 0) * 100
+        if df[metric][0] != 0:  # Избегаем деления на ноль
+            percentage_diff[metric] = ((df[metric][1] - df[metric][0]) / df[metric][0]) * 100
+        else:
+            percentage_diff[metric] = float('inf')  # Если первое значение равно нулю, ставим бесконечность
+    # Создаем строку с процентными разницами
+    diff_row = ['Facebook лучше на:', percentage_diff['BLUE'], percentage_diff['chrf'], percentage_diff['COMET']]
+    # Добавляем строку в DataFrame
+    df.loc[len(df)] = diff_row
     return df
 
 # Применяем функцию к каждому DataFrame
 for lang, df in dfs.items():
-    dfs[lang] = add_difference_columns(df)
+    dfs[lang] = add_percentage_difference_row(df)
 
 # Создаем вкладки для каждого языка
 tab_names = list(dfs.keys())

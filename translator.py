@@ -25,7 +25,7 @@ def configuration():
 
     models = model_names_0 + model_names_1
 
-    cols = st.columns([5, 2, 1])
+    cols = st.columns([5, 1])
     with cols[0]:
         selected_models = st.multiselect("Model(s)", models, placeholder="Select one or two models")
         st.session_state.selected_models = selected_models
