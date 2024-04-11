@@ -16,24 +16,24 @@ st.title('Наша Команда')
 members = [
     {
         "name": "Михаил ",
-        "photo": "pics/Screenshot_617.png",  # Укажите путь к фотографии
-        "telegram_url": "https://t.me/username1",
+        "photo": "pics/ml.png",  # Укажите путь к фотографии
+        "telegram_url": "https://t.me/Mikhail_Bykov",
         "github_url": "https://github.com/username1",
-        "website_url": "https://website.com/username1"
+        "website_url": " "
     },
     {
         "name": "Давид",
-        "photo": "pics/Screenshot_618.png",  # Укажите путь к фотографии
+        "photo": "pics/ml.png",  # Укажите путь к фотографии
         "telegram_url": "https://t.me/nonGilgamesh",
         "github_url": "https://github.com/all-mute",
         "website_url": "https://merkulov.ai"
     },
     {
         "name": "Глеб",
-        "photo": "pics/Screenshot_617.png",  # Укажите путь к фотографии
-        "telegram_url": "https://t.me/username3",
-        "github_url": "https://github.com/username3",
-        "website_url": "https://website.com/username3"
+        "photo": "pics/ml.png",  # Укажите путь к фотографии
+        "telegram_url": "https://t.me/Glebeshye",
+        "github_url": "https://github.com/Glebexe",
+        "website_url": "https://github.com/Glebexe"
     }
 ]
 
