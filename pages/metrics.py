@@ -43,7 +43,7 @@ def add_percentage_difference_row(df):
     # Предполагаем, что у нас всегда две модели для сравнения
     for metric in ['BLUE', 'chrf', 'COMET']:
         if df[metric][0] != 0:  # Избегаем деления на ноль
-            percentage_diff[metric] = ((df[metric][1] - df[metric][0]) / df[metric][0]) * 100
+            percentage_diff[metric] = f'{((df[metric][1] - df[metric][0]) / df[metric][0]) * 100 :.1f}' + '%'
         else:
             percentage_diff[metric] = float('inf')  # Если первое значение равно нулю, ставим бесконечность
     # Создаем строку с процентными разницами
@@ -63,4 +63,4 @@ tabs = st.tabs(tab_names)
 for tab_name, tab in zip(tab_names, tabs):
     with tab:
         st.write(f"Сравнение моделей для {tab_name} по метрикам")
-        st.dataframe(dfs[tab_name])
+        st.dataframe(dfs[tab_name], use_container_width=True)
