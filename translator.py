@@ -50,7 +50,7 @@ if send_button:
         if not user_input:
             st.error("Please enter a request")
         else:
-            with st.spinner('Processing...'):
+            with st.spinner('Processing (CPU)...'):
                 responses = []
                 for model in st.session_state.selected_models:
                     response = get_translation(model, user_input)
