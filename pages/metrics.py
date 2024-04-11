@@ -13,19 +13,18 @@ data = {
 # Преобразуем словарь в DataFrame
 df = pd.DataFrame(data)
 
-# Транспонируем DataFrame, чтобы модели были в строках, а метрики - в столбцах
-df_transposed = df.set_index('Model').T
-
-# Создаем вкладки для каждого языка
+# Создаем вкладки для каждого языка с более красивыми названиями
 tab_labels = ["Lij", "Mag", "Ace", "Dik"]
-tabs = st.tabs(tab_labels)
+tab_names = ["Язык Lij", "Язык Mag", "Язык Ace", "Язык Dik"]
+tabs = st.tabs(tab_names)
 
 for i, tab in enumerate(tabs):
     with tab:
-        # Предполагаем, что каждая модель относится к определенному языку
-        # Здесь вы можете добавить фильтрацию или другую логику, чтобы отобразить данные специфично для каждого языка
-        st.write(f"Сравнение моделей для языка {tab_labels[i]} по метрикам")
-        st.dataframe(df_transposed)
+        # Фильтруем DataFrame по языку
+        filtered_df = df[df['Model'].str.contains(tab_labels[i])]
 
-# Обратите внимание, что вам может потребоваться адаптировать логику отображения данных в зависимости от того,
-# как именно ваши данные должны быть разделены по языкам.
+        # Транспонируем отфильтрованный DataFrame, чтобы модели были в строках, а метрики - в столбцах
+        df_transposed = filtered_df.set_index('Model').T
+
+        st.write(f"Сравнение моделей для {tab_names[i]} по метрикам")
+        st.dataframe(df_transposed)
