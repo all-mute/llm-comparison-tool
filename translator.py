@@ -39,7 +39,7 @@ def show_response(response):
 
 configuration()
 
-user_input = st.text_area("Enter your request", placeholder="Enter here the user request", height=100)
+user_input = st.text_area("Enter your request", value="Let's go to france and see the eiffel tower", placeholder="Enter here the user request", height=100)
 
 send_button = st.button("Send Request")
 
