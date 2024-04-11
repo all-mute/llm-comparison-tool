@@ -17,7 +17,10 @@ def configuration():
         'ourmodel_eng_to_mag',
     ]
     model_names_1 = [
-        'nllb-200-translation_en_to_fr',
+        'nllb-200-eng_to_lij',
+        'nllb-200-eng_to_dik',
+        'nllb-200-eng_to_ace',
+        'nllb-200-eng_to_mag',
     ]
 
     models = model_names_0 + model_names_1
