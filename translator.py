@@ -56,6 +56,12 @@ if send_button:
             with st.spinner('Processing (CPU)...'):
                 responses = []
                 for model in st.session_state.selected_models:
-                    response = get_translation(model, user_input)
-                    responses.append((model, response))
+                    try:
+                        response = get_translation(model, user_input)
+                        responses.append((model, response))
+                    except Exception as e:
+                        st.error("Бэкенд недоступен или выключен")
+                        # Чтобы прервать текущую итерацию и перейти к следующей модели, используйте `continue`
+                        continue
                 show_response(responses)
+
