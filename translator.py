@@ -3,8 +3,8 @@ import requests
 import os
 from llm_handler import get_translation
 
-st.set_page_config(page_title="Перевод редких языков", layout="wide")
-st.title("Перевод редких языков")
+st.set_page_config(page_title="Перевод малоресурсных языков", layout="wide")
+st.title("Перевод малоресурсных языков")
 
 # Предполагается, что сервер запущен на localhost:8000
 SERVER_URL = "http://studcamp.merkulov.ai"
