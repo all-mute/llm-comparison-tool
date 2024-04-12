@@ -4,28 +4,28 @@ import pandas as pd
 # Создаем отдельные DataFrame для каждого языка
 data_li = {
     'Model': ['Eng_to_Lij_w2vpre', 'Eng_to_Lij_facebook'],
-    'BLUE': [2.90, 9.53],
+    'BLEU': [2.90, 9.53],
     'chrf': [28.58, 39.04],
     'COMET': [0.463, 0.579]
 }
 
 data_mag = {
     'Model': ['Eng_to_Mag_w2vpre', 'Eng_to_Mag_facebook'],
-    'BLUE': [4.34, 25.89],
+    'BLEU': [4.34, 25.89],
     'chrf': [28.67, 56.00],
     'COMET': [0.472, 0.655]
 }
 
 data_ace = {
     'Model': ['Eng_to_Ace_w2vpre', 'Eng_to_Ace_facebook'],
-    'BLUE': [0.5, 0.71],
-    'chrf': [20.16, 0.34],
+    'BLEU': [0.5, 0.71],
+    'chrf': [20.16, 30.50],
     'COMET': [0.547, 0.29]
 }
 
 data_dik = {
     'Model': ['Eng_to_Dik_w2vpre', 'Eng_to_Dik_facebook'],
-    'BLUE': [0.76, 2.39],
+    'BLEU': [0.76, 2.39],
     'chrf': [19.86, 22.26],
     'COMET': [0.582, 0.534]
 }
@@ -41,13 +41,13 @@ dfs = {
 def add_percentage_difference_row(df):
     percentage_diff = {}
     # Предполагаем, что у нас всегда две модели для сравнения
-    for metric in ['BLUE', 'chrf', 'COMET']:
+    for metric in ['BLEU', 'chrf', 'COMET']:
         if df[metric][0] != 0:  # Избегаем деления на ноль
             percentage_diff[metric] = f'{((df[metric][1] - df[metric][0]) / df[metric][0]) * 100 :.1f}' + '%'
         else:
             percentage_diff[metric] = float('inf')  # Если первое значение равно нулю, ставим бесконечность
     # Создаем строку с процентными разницами
-    diff_row = ['Facebook лучше на:', percentage_diff['BLUE'], percentage_diff['chrf'], percentage_diff['COMET']]
+    diff_row = ['Facebook лучше на:', percentage_diff['BLEU'], percentage_diff['chrf'], percentage_diff['COMET']]
     # Добавляем строку в DataFrame
     df.loc[len(df)] = diff_row
     return df
